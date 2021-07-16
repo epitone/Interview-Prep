@@ -12,13 +12,18 @@ function isUnique(testString) {
 
     // Time Complexity: O(n) where “n” is the length of the test string
     // Space Complexity: O(n) where “n” is the length of the test string
+    const start = performance.now();
     const letters = new Set()
     for (let index = 0; index < testString.length; index++) {
         if (letters.has(testString[index])) {
+            let end = performance.now();
+            console.log(`Runtime: ${end - start} ms`)
             return false;
         }
         letters.add(testString[index]);
     }
+    const end = performance.now();
+    console.log(`Runtime: ${end - start} ms`)
     return true;
 }
 
@@ -28,15 +33,20 @@ function isUniqueTwo(testString) {
      * The simplest solution would be to step through every single character starting from the beginning and compare them, if they're the same then we can stop.
      * This uses O(1) space complexity but O(n^2) time complexity
      */
+    const start = performance.now();
     for (let index = 0; index < testString.length; index++) {
         const letter = testString[index]
         for (let next = index + 1; next < testString.length; next++) {
             const letterTwo = testString[next];
             if (letter === letterTwo) {
+                let end = performance.now();
+                console.log(`Runtime: ${end - start} ms`);
                 return false;
             }
         }
     }
+    let end = performance.now();
+    console.log(`Runtime: ${end - start} ms`)
     return true;
 }
 
@@ -52,6 +62,7 @@ function isUniqueThree(testString) {
      * When we find a character in the string we flip the bit position of that character from 0 to 1.
      * You can simply view this as: 00000000 00000000 00000000 00000000
      */
+    const start = performance.now();
     let checker = 0;
     for (let index = 0; index < testString.length; index++) { // this is going to loop over the string
         /**
@@ -96,6 +107,8 @@ function isUniqueThree(testString) {
          * so we can return false.
          */
         if((checker & singleBitOnPosition) > 0) {
+            let end = performance.now();
+            console.log(`Runtime: ${end - start} ms`);
             return false;
         }
 
@@ -116,17 +129,22 @@ function isUniqueThree(testString) {
          */
         checker |= singleBitOnPosition;
     }
+    let end = performance.now()
+    console.log(`Runtime: ${end - start} ms`)
     return true;
 }
 
+console.log("Function 1")
 console.log(isUnique('racecar'))
-console.log(isUnique(''))
-console.log(isUnique('hiya'))
+// console.log(isUnique(''))
+// console.log(isUnique('hiya'))
 console.log('-------------')
+console.log("Function 2")
 console.log(isUniqueTwo('racecar'))
-console.log(isUniqueTwo(''))
-console.log(isUniqueTwo('hiya'))
+// console.log(isUniqueTwo(''))
+// console.log(isUniqueTwo('hiya'))
 console.log('-------------')
+console.log("Function 3")
 console.log(isUniqueThree('racecar'))
-console.log(isUniqueThree(''))
-console.log(isUniqueThree('hiya'))
+// console.log(isUniqueThree(''))
+// console.log(isUniqueThree('hiya'))
